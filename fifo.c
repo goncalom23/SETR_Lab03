@@ -12,10 +12,17 @@
 #include <stdint.h>
 #include "fifo.h"
 
-void MyFIFOInit(uint32_t fifo_size,uint32_t fifo_id )
+void MyFIFOInit()
 {
     FIFO* head = NULL;
     head = (FIFO *) malloc(sizeof(FIFO));
+}
+
+void MyFIFORemove()
+{
+    FIFO *aux;	
+    aux = head->next;
+    head = head->next;
 }
 
 //Debbuging main

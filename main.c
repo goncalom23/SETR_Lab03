@@ -18,8 +18,7 @@
 
 int main(void)
 {
-    uint32_t fifo_size = 10;
-    MyFIFOInit(fifo_size);
+    MyFIFOInit();
     return 0;
 }
 
