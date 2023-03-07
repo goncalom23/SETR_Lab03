@@ -13,11 +13,13 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
+#include <stdint.h>
 #include "fifo.h"
 
 int main(void)
 {
-
+    uint32_t fifo_size = 10;
+    MyFIFOInit(fifo_size);
     return 0;
 }
 

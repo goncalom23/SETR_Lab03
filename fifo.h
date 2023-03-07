@@ -8,14 +8,18 @@
 
 #include<stdio.h>
 #include<stdlib.h>
+#include <stdint.h>
 #include<time.h>
 
 #ifndef fifo_H
 #define fifo_H
 
-/* Code here */
+typedef struct FIFO  
+{
+    uint32_t data;
+    FIFO *next;
+}FIFO;
 
+extern FIFO *head = NULL;
 
 #endif
-
-
