@@ -1,24 +1,21 @@
 /**
- * \file:   main.c
+ * \file:   fifo.h
  * \author: Gonçalo Martins <goncalom23@ua.pt> and Filipe Silva <filipe.msilva@ua.pt>
  *
- * \date March 07, 2023, 09:45 AM
- * 
- * \brief Module to implement a FIFO. 
- * 
+ * \date March 07, 2023, 09:47 AM
  * 
  */
-
 
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
-#include "fifo.h"
 
-int main(void)
-{
+#ifndef fifo_H
+#define fifo_H
 
-    return 0;
-}
+/* Code here */
+
+
+#endif
 
 
