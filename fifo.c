@@ -12,37 +12,69 @@
 #include <stdint.h>
 #include "fifo.h"
 
+#define RESET   "\033[0m"
+#define RED     "\033[31m"      /* Red */
+
 
 struct FIFO* head = NULL;
+uint32_t FIFO_size;
 
 void MyFIFOInit()
 {
     head = (struct FIFO *) malloc(sizeof(FIFO));
-    head->next = NULL;
+    head->next = 0;
+    FIFO_size = 0;
 }
 
 void MyFIFORemove()
 {
+    if(FIFO_size <= 0)
+    {
+        printf(RED "FIFO is already empty, ignored\n" RESET);
+        return;
+    }
     struct FIFO* aux = head;
     head = head->next;
     free(aux);
+    FIFO_size--;
 }
 
-void MyFIFOInsert(uint32_t data){
-    struct FIFO *aux = head;
-    struct FIFO *prev = NULL;
-    if(head->next == NULL){
+void MyFIFOInsert(uint32_t data)
+{
+    struct FIFO *current = head;
+    struct FIFO *new = NULL;
+    //printf("%u\n", FIFO_size);
+
+    if(head->next == NULL && FIFO_size == 0)
+    {
+        //printf("debug1\n");
         head->data = data;
+        head->next = NULL;
+        FIFO_size++;
     }
-    else{
-    while(aux->next != NULL){
-        prev = aux;
-        aux = aux->next;
+
+    else if(head->next == NULL && FIFO_size == 1)
+    {
+        //printf("debug2\n");
+        new = (struct FIFO *) malloc(sizeof(FIFO));
+        new->data = data;
+        head->next = new;
+        new->next = NULL;
+        FIFO_size++;
     }
-    aux = (struct FIFO *) malloc(sizeof(FIFO));
-    prev->next = aux;
-    aux->data = data;
-    aux->next = NULL;
+
+    else if(FIFO_size >= 2)
+    {
+        //printf("debug3\n");
+        while (current->next != NULL)
+        {
+            current = current->next;
+        }
+        new = (struct FIFO *) malloc(sizeof(FIFO));
+        new->data = data;
+        new->next = NULL;
+        current->next = new;
+        FIFO_size++;
     }
 }
 
@@ -51,17 +83,5 @@ uint32_t MyFIFOPeep(void){
 }
 
 uint32_t MyFIFOSize(void){
-    uint32_t cnt = 0;
-    struct FIFO *aux = head;
-    if(head->next == NULL){
-        return cnt;
-    }
-    else{
-    while(aux->next != NULL){
-        cnt++;
-        aux = aux->next;
-    }
-    cnt++;      //Adds final element
-    return cnt;
-    }
+    return FIFO_size;
 }
