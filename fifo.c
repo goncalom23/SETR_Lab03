@@ -12,24 +12,50 @@
 #include <stdint.h>
 #include "fifo.h"
 
+
+struct FIFO* head = NULL;
+
 void MyFIFOInit()
 {
-    FIFO* head = NULL;
-    head = (FIFO *) malloc(sizeof(FIFO));
+    head = (struct FIFO *) malloc(sizeof(FIFO));
 }
 
 void MyFIFORemove()
 {
-    FIFO *aux;	
-    aux = head->next;
+    struct FIFO* aux = head;
     head = head->next;
+    free(aux);
 }
 
-//Debbuging main
-/*int main(void)
-{
-    
-    return 0;
-}*/
+void MyFIFOInsert(uint32_t data){
+    struct FIFO *aux = head;
+    struct FIFO *prev = NULL;
+    while(aux->next != NULL){
+        prev = aux;
+        aux = aux->next;
+    }
+    aux = (struct FIFO *) malloc(sizeof(FIFO));
+    prev->next = aux;
+    aux->data = data;
+    aux->next = NULL;
+}
 
+uint32_t MyFIFOPeep(void){
+    return head->data;
+}
 
+uint32_t MyFIFOSize(void){
+    uint32_t cnt = 0;
+    struct FIFO *aux = head;
+    if(head->next == NULL){
+        return cnt;
+    }
+    else{
+    while(aux->next != NULL){
+        cnt++;
+        aux = aux->next;
+    }
+    cnt++;      //Adds final element
+    return cnt;
+    }
+}

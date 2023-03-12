@@ -14,12 +14,15 @@
 #ifndef fifo_H
 #define fifo_H
 
-typedef struct FIFO  
+struct FIFO  
 {
     uint32_t data;
-    FIFO *next;
+    struct FIFO *next;
 }FIFO;
 
-extern FIFO *head = NULL;
+extern struct FIFO* head;
+void MyFIFOInit();
+void MyFIFOInsert(uint32_t data);
+uint32_t MyFIFOPeep(void);
 
 #endif
