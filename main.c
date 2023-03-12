@@ -26,9 +26,9 @@ int main(void)
     printf("Hello 3\n");
     MyFIFOInsert(3);
     printf("Hello 4\n");
-    MyFIFOInsert(4);
-     printf("Hello 5\n");
-    printf("Last Number is: %u", MyFIFOPeep());
+    MyFIFOInsert(30123);
+    printf("Hello 5\n");
+    printf("Last Number is: %u\n", MyFIFOPeep());
     return 0;
 }
 

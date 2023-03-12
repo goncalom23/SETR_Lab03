@@ -18,6 +18,7 @@ struct FIFO* head = NULL;
 void MyFIFOInit()
 {
     head = (struct FIFO *) malloc(sizeof(FIFO));
+    head->next = NULL;
 }
 
 void MyFIFORemove()
@@ -30,6 +31,10 @@ void MyFIFORemove()
 void MyFIFOInsert(uint32_t data){
     struct FIFO *aux = head;
     struct FIFO *prev = NULL;
+    if(head->next == NULL){
+        head->data = data;
+    }
+    else{
     while(aux->next != NULL){
         prev = aux;
         aux = aux->next;
@@ -38,6 +43,7 @@ void MyFIFOInsert(uint32_t data){
     prev->next = aux;
     aux->data = data;
     aux->next = NULL;
+    }
 }
 
 uint32_t MyFIFOPeep(void){
