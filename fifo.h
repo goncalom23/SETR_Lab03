@@ -26,5 +26,7 @@ extern uint32_t FIFO_size;
 void MyFIFOInit();
 void MyFIFOInsert(uint32_t data);
 uint32_t MyFIFOPeep(void);
+uint32_t MyFIFOSize(void);
+void MyFIFORemove(void);
 
 #endif
