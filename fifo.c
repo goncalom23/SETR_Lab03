@@ -22,7 +22,7 @@ uint32_t FIFO_size;
 void MyFIFOInit()
 {
     head = (struct FIFO *) malloc(sizeof(FIFO));
-    head->next = 0;
+    head->next = NULL;
     FIFO_size = 0;
 }
 
@@ -30,7 +30,14 @@ void MyFIFORemove()
 {
     if(FIFO_size <= 0)
     {
-        printf(RED "FIFO is already empty, ignored\n" RESET);
+        printf(RED "FIFO is already empty, ignoring...\n" RESET);
+        return;
+    }
+    if(FIFO_size == 1){
+        free(head);
+        head = (struct FIFO *) malloc(sizeof(FIFO));
+        head->next = NULL;
+        FIFO_size--;
         return;
     }
     struct FIFO* aux = head;
@@ -39,7 +46,7 @@ void MyFIFORemove()
     FIFO_size--;
 }
 
-void MyFIFOInsert(uint32_t data)
+void MyFIFOInsert(uint32_t data, uint32_t pri)
 {
     struct FIFO *current = head;
     struct FIFO *new = NULL;
@@ -49,6 +56,7 @@ void MyFIFOInsert(uint32_t data)
     {
         //printf("debug1\n");
         head->data = data;
+        head->priority = pri;
         head->next = NULL;
         FIFO_size++;
     }
@@ -58,6 +66,7 @@ void MyFIFOInsert(uint32_t data)
         //printf("debug2\n");
         new = (struct FIFO *) malloc(sizeof(FIFO));
         new->data = data;
+        new->priority = pri;
         head->next = new;
         new->next = NULL;
         FIFO_size++;
@@ -72,6 +81,7 @@ void MyFIFOInsert(uint32_t data)
         }
         new = (struct FIFO *) malloc(sizeof(FIFO));
         new->data = data;
+        new->priority = pri;
         new->next = NULL;
         current->next = new;
         FIFO_size++;
@@ -79,7 +89,13 @@ void MyFIFOInsert(uint32_t data)
 }
 
 uint32_t MyFIFOPeep(void){
+    if(FIFO_size == 0){
+        printf(RED "Fifo is empty, returning zero: " RESET);
+        return 0;
+    }
+    else{
     return head->data;
+    }
 }
 
 uint32_t MyFIFOSize(void){

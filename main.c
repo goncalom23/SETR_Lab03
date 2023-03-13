@@ -19,19 +19,20 @@
 int main(void)
 {
     MyFIFOInit();
+	printf("%u\n", MyFIFOPeep());
     MyFIFORemove();
     //printf("Hello 1\n");
-    MyFIFOInsert(120);
+    MyFIFOInsert(120, 1);
+	MyFIFORemove();
     //printf("Hello 2\n");
-    MyFIFOInsert(2);
+    MyFIFOInsert(2, 1);
     //printf("Hello 3\n");
-    MyFIFOInsert(3);
+    MyFIFOInsert(3, 3);
     //printf("Hello 4\n");
-    MyFIFOInsert(123123);
+    MyFIFOInsert(123123, 2);
     MyFIFORemove();
+	MyFIFOInsert(5, 3);
     //printf("Hello 5\n");
-    printf("Last Number is: %u\n", MyFIFOPeep());
+    printf("Oldest Number is %u and number of elements is %u\n", MyFIFOPeep(), MyFIFOSize());
     return 0;
 }
-
-

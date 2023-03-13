@@ -17,14 +17,14 @@
 struct FIFO  
 {
     uint32_t data;
-    uint8_t flag_data_used;
+    uint32_t priority;
     struct FIFO *next;
 }FIFO;
 
 extern struct FIFO* head;
 extern uint32_t FIFO_size;
 void MyFIFOInit();
-void MyFIFOInsert(uint32_t data);
+void MyFIFOInsert(uint32_t data, uint32_t pri);
 uint32_t MyFIFOPeep(void);
 uint32_t MyFIFOSize(void);
 void MyFIFORemove(void);
