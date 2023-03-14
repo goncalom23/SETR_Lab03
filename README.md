@@ -1,2 +1,2 @@
-# SETR_lab03
+SETR_Lab03 FIFO with dynamic memory allocation
 
