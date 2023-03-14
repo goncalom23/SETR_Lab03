@@ -1,0 +1,15 @@
+/**
+
+@mainpage SETR_Lab03 Documentation
+
+@author Gonçalo Martins <goncalom23@ua.pt> and Filipe Silva <filipe.msilva@ua.pt>
+
+Main: 
+Used to debug our FIFO
+
+FIFO implementation with dynamic memory allocation
+
+@bug No known bugs.
+
+*/
+

@@ -20,6 +20,10 @@
 struct FIFO* head = NULL;
 uint32_t FIFO_size;
 
+/** 
+* \brief This is where the head of the linked list is created, and some memory is alocated.
+* This function assumes that the FIFO will have at least one element.
+*/
 void MyFIFOInit()
 {
     head = (struct FIFO *) malloc(sizeof(FIFO));
@@ -27,6 +31,12 @@ void MyFIFOInit()
     FIFO_size = 0;
 }
 
+/** 
+ * \brief Checks if the number of elements is zero, and thows an error if true.
+ * It recognizes the case where the size is 1, and the next of the head is undefined (memory that should not be acessed)
+ * 
+ * Since the oldest is always in the first position, it only changes the head pointer, and liberates the first element memory
+*/
 void MyFIFORemove()
 {
     if(FIFO_size <= 0)
@@ -47,7 +57,13 @@ void MyFIFORemove()
     FIFO_size--;
 }
 
-void MyFIFOInsert(uint32_t data, uint32_t pri)
+/** 
+ * \brief Inserts the given data in the linked list.
+ * 
+ * Always inserts in the end, and it can detect when the list is empty or with one element.
+ * Allocates only the necessary memory each time.
+*/
+void MyFIFOInsert(uint32_t data)
 {
     struct FIFO *current = head;
     struct FIFO *new = NULL;
@@ -57,7 +73,6 @@ void MyFIFOInsert(uint32_t data, uint32_t pri)
     {
         //printf("debug1\n");
         head->data = data;
-        head->priority = pri;
         head->next = NULL;
         FIFO_size++;
     }
@@ -67,7 +82,6 @@ void MyFIFOInsert(uint32_t data, uint32_t pri)
         //printf("debug2\n");
         new = (struct FIFO *) malloc(sizeof(FIFO));
         new->data = data;
-        new->priority = pri;
         head->next = new;
         new->next = NULL;
         FIFO_size++;
@@ -82,13 +96,17 @@ void MyFIFOInsert(uint32_t data, uint32_t pri)
         }
         new = (struct FIFO *) malloc(sizeof(FIFO));
         new->data = data;
-        new->priority = pri;
         new->next = NULL;
         current->next = new;
         FIFO_size++;
     }
 }
 
+/** 
+ * \brief Gives the data that is in the head of the FIFO, since it is always the oldest.
+ * 
+ * Throws and error when you try to peep an empty FIFO. 
+*/
 uint32_t MyFIFOPeep(void){
     if(FIFO_size == 0){
         printf(RED "Fifo is empty, returning zero: " RESET);
@@ -99,6 +117,9 @@ uint32_t MyFIFOPeep(void){
     }
 }
 
+/** 
+* \brief Return the variable FIFOSize, since the number of current elements is allways tracked.
+*/
 uint32_t MyFIFOSize(void){
     return FIFO_size;
 }
