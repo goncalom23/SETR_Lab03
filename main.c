@@ -4,7 +4,7 @@
  *
  * \date March 07, 2023, 09:45 AM
  * 
- * \brief Module to implement a FIFO. 
+ * \brief Module to test fifo library. Shows some error detection that was implemented
  * 
  * 
  */
@@ -22,7 +22,7 @@ int main(void)
 	printf("%u\n", MyFIFOPeep());
     MyFIFORemove();
     //printf("Hello 1\n");
-    MyFIFOInsert(120, 1);
+    MyFIFOInsert(1,1);
 	MyFIFORemove();
     //printf("Hello 2\n");
     MyFIFOInsert(2, 1);
@@ -33,6 +33,6 @@ int main(void)
     MyFIFORemove();
 	MyFIFOInsert(5, 3);
     //printf("Hello 5\n");
-    printf("Oldest Number is %u and number of elements is %u\n", MyFIFOPeep(), MyFIFOSize());
+    printf("Oldest Number is %u and number of elements in FIFO is %u\n", MyFIFOPeep(), MyFIFOSize());
     return 0;
 }
